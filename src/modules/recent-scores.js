@@ -1,4 +1,16 @@
-const listItem = ['One piece', 'Naruto', 'AOT', 'Hero Academia'];
+import fetchData from '../api/fetchData.js';
+
+const getScores = (scoreList) => {
+  scoreList.replaceChildren();
+  fetchData().then((res) => {
+    res.result.map((item) => {
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `${item.user}: ${item.score}`;
+      scoreList.appendChild(listItem);
+      return '';
+    });
+  });
+};
 
 const recentScores = (parent) => {
   const scores = document.createElement('div');
@@ -12,15 +24,11 @@ const recentScores = (parent) => {
   scoreBtn.innerHTML = 'Refresh';
   headingBtn.appendChild(scoreBtn);
   scores.appendChild(headingBtn);
-
   const scoreList = document.createElement('ul');
-  listItem.map((item) => {
-    const listItem = document.createElement('li');
-    listItem.innerHTML = item;
-    scoreList.appendChild(listItem);
-    return '';
-  });
-
+  getScores(scoreList);
+  scoreBtn.onclick = () => {
+    getScores(scoreList);
+  };
   scores.appendChild(scoreList);
   parent.appendChild(scores);
 };

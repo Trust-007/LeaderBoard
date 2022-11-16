@@ -2,7 +2,7 @@
 
 # LeaderBoard
 
-> This project is a simple App that implements a todo list using webpack.
+> This project is a simple App that fetches scores from an API server and then displays them. Users can also add new scores.
 
 ## Built With
 
